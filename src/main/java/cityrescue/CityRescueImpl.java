@@ -21,9 +21,15 @@ public class CityRescueImpl implements CityRescue {
     // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
     int tick;
     CityMap cityMap;
+    
     Station[] stations;
+    int stationCounter;
+
     Unit[] units;
+    int unitCounter;
+
     Incident[] incidents;
+    int incidentCounter;
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
