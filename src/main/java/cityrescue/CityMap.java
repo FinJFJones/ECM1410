@@ -1,8 +1,14 @@
 package cityrescue;
 
+<<<<<<< Updated upstream
 // Grid size
 // Blocked + Grid
 // Legal Move
+=======
+//  knows the grid size, which cells are blocked, and whether a move is legal
+
+public class CityMap {
+>>>>>>> Stashed changes
 
 public class CityMap {
     int[] gridSize;
