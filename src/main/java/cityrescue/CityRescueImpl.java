@@ -19,26 +19,38 @@ import cityrescue.exceptions.InvalidUnitException;
 public class CityRescueImpl implements CityRescue {
 
     // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
+    int tick;
+    CityMap cityMap;
+    Station[] stations;
+    Unit[] units;
+    Incident[] incidents;
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
-        // TODO: implement
+        // TODO: implement 
         if (width < 1 || height < 1){
             throw new InvalidGridException("Invalid Grid Size");
         }
-        throw new UnsupportedOperationException("Not implemented yet");
+        tick = 0;
+        cityMap = new CityMap(width,height);
+
     }
 
     @Override
     public int[] getGridSize() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        return cityMap.gridSize;
     }
 
     @Override
     public void addObstacle(int x, int y) throws InvalidLocationException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (x < 0 || x > (cityMap.w -1)){
+            throw new InvalidLocationException("x not in bounds");
+        }
+        if (y < 0 || y > (cityMap.h -1)){
+            throw new InvalidLocationException("y not in bounds");
+        }
+
+        
     }
 
     @Override
