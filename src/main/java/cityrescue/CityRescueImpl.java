@@ -136,14 +136,14 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
+        
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        // Loop through stationId
+        units[unitId-1].homeStationId = newStationId;
     }
 
     @Override
