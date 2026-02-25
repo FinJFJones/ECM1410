@@ -9,7 +9,7 @@ import cityrescue.exceptions.InvalidLocationException;
 import cityrescue.exceptions.InvalidNameException;
 import cityrescue.exceptions.InvalidSeverityException;
 import cityrescue.exceptions.InvalidUnitException;
-
+import cityrescue.Utils;
 /**
  * CityRescueImpl (Starter)
  *
@@ -95,9 +95,10 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
         int[] Ids = getStationIds();
-        if !linearSearch(Ids,stationId){
+        if !Utils.linearSearch(Ids,stationId){
             throw new IDNotRecognisedException("No such station Id.")
         }
+
     }
 
     @Override
@@ -138,13 +139,12 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
-        
+        // TODO: implement
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
-        // Loop through stationId
         units[unitId-1].homeStationId = newStationId;
     }
 
