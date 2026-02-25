@@ -162,9 +162,10 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
-        if (Utils.linearSearch(getStationIds(), newStationId)) {
-            units[unitId-1].homeStationId = newStationId;
-        }
+        if (!Utils.linearSearch(getUnitIds(), unitId)) { throw new IDNotRecognisedException("Unit does not exist."); }
+        if (!Utils.linearSearch(getStationIds(), newStationId)) { throw new IDNotRecognisedException("Station does not exist."); }
+        if (units[unitId-1])
+        units[unitId-1].homeStationId = newStationId;
     }
 
     @Override

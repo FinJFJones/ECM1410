@@ -1,29 +1,33 @@
 package cityrescue;
 
+import cityrescue.enums.UnitType;
+
 public abstract class Unit {
     int Id;
+    UnitType type;
     int homeStationId;
     int[] loc;
 
-    public Unit(int stationId) {
+    public Unit(int stationId, UnitType type) {
         this.homeStationId = stationId;
+        this.type = type;
     }
 }
 
 class Ambulance extends Unit {
-    public Ambulance(int stationId) {
-        super(stationId);
+    public Ambulance(int stationId, UnitType type) {
+        super(stationId, type);
     }
 }
 
 class FireEngine extends Unit {
-    public FireEngine(int stationId) {
-        super(stationId);
+    public FireEngine(int stationId, UnitType type) {
+        super(stationId, type);
     }
 }
 
 class PoliceCar extends Unit {
-    public PoliceCar(int stationId) {
-        super(stationId);
+    public PoliceCar(int stationId, UnitType type) {
+        super(stationId, type);
     }
 }
