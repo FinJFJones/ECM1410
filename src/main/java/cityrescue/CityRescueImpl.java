@@ -35,7 +35,7 @@ public class CityRescueImpl implements CityRescue {
     public void initialise(int width, int height) throws InvalidGridException {
         // TODO: implement 
         if (width < 1 || height < 1){
-            throw new InvalidGridException("Invalid Grid Size");
+            throw new InvalidGridException("Invalid Grid Size.");
         }
         tick = 0;
         cityMap = new CityMap(width,height);
@@ -62,7 +62,7 @@ public class CityRescueImpl implements CityRescue {
             cityMap.blocked[x][y] = true;
         }
         else{
-            throw new InvalidLocationException("Location not in bounds");
+            throw new InvalidLocationException("Location not in bounds.");
         }
     }
 
@@ -72,14 +72,21 @@ public class CityRescueImpl implements CityRescue {
             cityMap.blocked[x][y] = false;
         }
         else{
-            throw new InvalidLocationException("Location not in bounds");
+            throw new InvalidLocationException("Location not in bounds.");
         }
     }
 
     @Override
     public int addStation(String name, int x, int y) throws InvalidNameException, InvalidLocationException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (name.isBlank()){
+            throw new InvalidNameException("Name cannot be blank.");
+        }
+        if (cityMap.isInBounds(x, y)){
+            //do stuff
+        }
+        else{
+            throw new InvalidLocationException("Location not in bounds.");
+        }
     }
 
     @Override
