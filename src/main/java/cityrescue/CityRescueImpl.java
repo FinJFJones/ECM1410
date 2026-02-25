@@ -41,8 +41,13 @@ public class CityRescueImpl implements CityRescue {
         cityMap = new CityMap(width,height);
 
         stations = new Station[20];
+        stationCounter = 0;
+
         units = new Unit[50];
+        unitCounter = 0;
+
         incidents = new Incident[200];
+        incidentCounter = 0;
 
     }
 
