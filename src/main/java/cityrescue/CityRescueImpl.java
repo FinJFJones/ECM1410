@@ -123,8 +123,7 @@ public class CityRescueImpl implements CityRescue {
                 break;
         }
         unitCounter++;
-        
-        throw new UnsupportedOperationException("Not implemented yet");
+        return unitCounter;
     }
 
     @Override
