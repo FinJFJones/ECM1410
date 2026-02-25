@@ -8,6 +8,8 @@ public abstract class Unit {
     int homeStationId;
     int[] loc;
 
+    // implement state (e.g idle)
+
     public Unit(int stationId, UnitType type) {
         this.homeStationId = stationId;
         this.type = type;
