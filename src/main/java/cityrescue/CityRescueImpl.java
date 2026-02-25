@@ -111,7 +111,19 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
-        units[unitCounter] = new Ambulance(stationId);
+        switch (type) {
+            case AMBULANCE:
+                units[unitCounter] = new Ambulance(stationId);
+                break;
+            case FIRE_ENGINE:
+                units[unitCounter] = new FireEngine(stationId);
+                break;
+            case POLICE_CAR:
+                units[unitCounter] = new PoliceCar(stationId);
+                break;
+        }
+        unitCounter++;
+        
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
