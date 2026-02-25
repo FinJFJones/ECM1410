@@ -24,6 +24,7 @@ public class CityRescueImpl implements CityRescue {
 
     Station[] stations;
     int stationCounter;
+    int stationRemoveCounter;
 
     Unit[] units;
     int unitCounter;
@@ -105,8 +106,15 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int[] getStationIds() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] stationIds = new int[(stationCounter - stationRemoveCounter)];
+        int IdsIndex = 0;
+
+        for (int i = 0; i < stationCounter; i++) {
+            if (stations[i] != null) {
+                stationIds[IdsIndex] = stations[i].Id;
+            }
+        }
+        return stationIds;
     }
 
     @Override
