@@ -94,8 +94,10 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] Ids = getStationIds();
+        if !linearSearch(Ids,stationId){
+            throw new IDNotRecognisedException("No such station Id.")
+        }
     }
 
     @Override
