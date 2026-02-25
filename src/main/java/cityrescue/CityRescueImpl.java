@@ -50,13 +50,18 @@ public class CityRescueImpl implements CityRescue {
             throw new InvalidLocationException("y not in bounds");
         }
 
-        
+        cityMap.blocked[x][y] = true;
     }
 
     @Override
     public void removeObstacle(int x, int y) throws InvalidLocationException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (x < 0 || x > (cityMap.w -1)){
+            throw new InvalidLocationException("x not in bounds");
+        }
+        if (y < 0 || y > (cityMap.h -1)){
+            throw new InvalidLocationException("y not in bounds");
+        }
+        cityMap.blocked[x][y] = false;
     }
 
     @Override
