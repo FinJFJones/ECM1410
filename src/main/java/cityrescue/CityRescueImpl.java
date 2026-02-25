@@ -112,6 +112,16 @@ public class CityRescueImpl implements CityRescue {
         if (!Utils.linearSearch(Ids,stationId)){
             throw new IDNotRecognisedException("No such station Id.");
         }
+        Station station = stations[stationId-1];
+
+        if (maxUnits < station.numUnits){
+            throw new InvalidCapacityException("New capacity limit exceeds current station capacity.");
+        }
+        if (maxUnits < 1){
+            throw new InvalidCapacityException("Max units cannot be <1.");
+        }
+
+        station.maxUnits = maxUnits;
     }
 
     @Override

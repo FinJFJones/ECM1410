@@ -14,7 +14,7 @@ public class Station {
         this.Id = Id;
         this.loc = loc;
         this.maxUnits = 200; //worst case has 200 units (all of the possible units)
-        this.units = new Unit[this.maxUnits];
+        this.units = new Unit[200];
         this.numUnits = 0;
     }
 }
