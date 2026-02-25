@@ -1,7 +1,14 @@
 package cityrescue;
 
-import cityrescue.enums.*;
-import cityrescue.exceptions.*;
+import cityrescue.enums.IncidentType;
+import cityrescue.enums.UnitType;
+import cityrescue.exceptions.IDNotRecognisedException;
+import cityrescue.exceptions.InvalidCapacityException;
+import cityrescue.exceptions.InvalidGridException;
+import cityrescue.exceptions.InvalidLocationException;
+import cityrescue.exceptions.InvalidNameException;
+import cityrescue.exceptions.InvalidSeverityException;
+import cityrescue.exceptions.InvalidUnitException;
 
 /**
  * CityRescueImpl (Starter)
@@ -16,6 +23,9 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
         // TODO: implement
+        if (width < 1 || height < 1){
+            throw new InvalidGridException("Invalid Grid Size");
+        }
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
