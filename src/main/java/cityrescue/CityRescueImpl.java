@@ -21,7 +21,7 @@ public class CityRescueImpl implements CityRescue {
     // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
     int tick;
     CityMap cityMap;
-    
+
     Station[] stations;
     int stationCounter;
 
@@ -40,6 +40,10 @@ public class CityRescueImpl implements CityRescue {
         tick = 0;
         cityMap = new CityMap(width,height);
 
+        stations = new Station[20];
+        units = new Unit[50];
+        incidents = new Incident[200];
+
     }
 
     @Override
@@ -55,7 +59,6 @@ public class CityRescueImpl implements CityRescue {
         if (y < 0 || y > (cityMap.h -1)){
             throw new InvalidLocationException("y not in bounds");
         }
-
         cityMap.blocked[x][y] = true;
     }
 
