@@ -1,6 +1,4 @@
 package cityrescue;
-
-// Grid size
 // Blocked + Grid
 // Legal Move
 
@@ -19,5 +17,14 @@ public class CityMap {
 
     public boolean isLegalMove() {
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+    public boolean isInBounds(int x, int y){
+        if (x < 0 || x > (this.w -1)){
+            return false;
+        }
+        if (y < 0 || y > (this.h -1)){
+            return false;
+        }
+        return true;
     }
 }
