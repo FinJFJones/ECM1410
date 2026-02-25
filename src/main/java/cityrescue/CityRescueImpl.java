@@ -82,7 +82,9 @@ public class CityRescueImpl implements CityRescue {
             throw new InvalidNameException("Name cannot be blank.");
         }
         if (cityMap.isInBounds(x, y)){
-            //do stuff
+            int[] loc = new int[]{x,y};
+            stations[stationCounter] = new Station(name,stationCounter,loc);
+            return stationCounter++;
         }
         else{
             throw new InvalidLocationException("Location not in bounds.");
