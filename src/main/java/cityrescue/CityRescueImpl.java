@@ -30,6 +30,7 @@ public class CityRescueImpl implements CityRescue {
 
     Incident[] incidents;
     int incidentCounter;
+    int incidentRemoveCounter;
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
@@ -132,6 +133,7 @@ public class CityRescueImpl implements CityRescue {
         for (int i = 0; i < stationCounter; i++) {
             if (stations[i] != null) {
                 stationIds[IdsIndex] = stations[i].Id;
+                IdsIndex++;
             }
         }
         return stationIds;
@@ -212,8 +214,16 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int[] getIncidentIds() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] IncidentIds = new int[(incidentCounter - incidentRemoveCounter)];
+        int IdsIndex = 0;
+
+        for (int i = 0; i < incidentCounter; i++) {
+            if (incidents[i] != null) {
+                incidentIds[IdsIndex] = incidents[i].Id;
+                IdsIndex++;
+            }
+        }
+        return incidentIds;
     }
 
     @Override
