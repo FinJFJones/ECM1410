@@ -8,6 +8,7 @@ public abstract class Unit {
     int ticksToResolve;
     UnitType type;
     UnitStatus status;
+    boolean exists;
     int incidentID;
     int homeStationId;
     int[] loc;
@@ -20,6 +21,7 @@ public abstract class Unit {
         this.type = type;
         this.incidentID = -1;
         this.status = UnitStatus.IDLE;
+        this.exists = true;
     }
 
     public void move() {
