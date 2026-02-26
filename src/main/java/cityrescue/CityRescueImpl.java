@@ -148,18 +148,18 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
+        unitCounter++;
         switch (type) {
             case AMBULANCE:
-                units[unitCounter] = new Ambulance(stationId, type);
+                units[unitCounter-1] = new Ambulance(unitCounter, stationId, type);
                 break;
             case FIRE_ENGINE:
-                units[unitCounter] = new FireEngine(stationId, type);
+                units[unitCounter-1] = new FireEngine(unitCounter, stationId, type);
                 break;
             case POLICE_CAR:
-                units[unitCounter] = new PoliceCar(stationId, type);
+                units[unitCounter-1] = new PoliceCar(unitCounter, stationId, type);
                 break;
         }
-        unitCounter++;
         return unitCounter;
     }
 
@@ -308,5 +308,9 @@ public class CityRescueImpl implements CityRescue {
     public String getStatus() {
         // TODO: implement
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    public CityRescueImpl saveState() {
+
     }
 }

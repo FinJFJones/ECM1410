@@ -12,7 +12,8 @@ public abstract class Unit {
 
     // implement state (e.g idle)
 
-    public Unit(int stationId, UnitType type) {
+    public Unit(int Id, int stationId, UnitType type) {
+        this.Id = Id;
         this.homeStationId = stationId;
         this.type = type;
         this.status = UnitStatus.IDLE;
@@ -20,19 +21,19 @@ public abstract class Unit {
 }
 
 class Ambulance extends Unit {
-    public Ambulance(int stationId, UnitType type) {
-        super(stationId, type);
+    public Ambulance(int Id, int stationId, UnitType type) {
+        super(Id, stationId, type);
     }
 }
 
 class FireEngine extends Unit {
-    public FireEngine(int stationId, UnitType type) {
-        super(stationId, type);
+    public FireEngine(int Id, int stationId, UnitType type) {
+        super(Id, stationId, type);
     }
 }
 
 class PoliceCar extends Unit {
-    public PoliceCar(int stationId, UnitType type) {
-        super(stationId, type);
+    public PoliceCar(int Id, int stationId, UnitType type) {
+        super(Id, stationId, type);
     }
 }
