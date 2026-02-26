@@ -1,7 +1,5 @@
 package cityrescue;
 
-import java.io.Console;
-
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
@@ -21,7 +19,6 @@ import cityrescue.exceptions.InvalidUnitException;
  */
 public class CityRescueImpl implements CityRescue {
 
-    // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
     int tick;
     CityMap cityMap;
 
@@ -39,7 +36,6 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
-        // TODO: implement 
         if (width < 1 || height < 1){
             throw new InvalidGridException("Invalid Grid Size.");
         }
