@@ -5,6 +5,7 @@ import cityrescue.enums.UnitType;
 
 public abstract class Unit {
     int Id;
+    int ticksToResolve;
     UnitType type;
     UnitStatus status;
     int incidentID;
@@ -25,17 +26,20 @@ public abstract class Unit {
 class Ambulance extends Unit {
     public Ambulance(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
+        this.ticksToResolve = 2;
     }
 }
 
 class FireEngine extends Unit {
     public FireEngine(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
+        this.ticksToResolve = 4;
     }
 }
 
 class PoliceCar extends Unit {
     public PoliceCar(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
+        this.ticksToResolve = 3;
     }
 }
