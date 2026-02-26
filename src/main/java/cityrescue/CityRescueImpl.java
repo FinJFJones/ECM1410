@@ -323,8 +323,24 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void dispatch() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (Incident incident : incidents) {
+            if (incident.incidentStatus == IncidentStatus.REPORTED) {
+                int taxiCabDist = (getGridSize()[0]-1 + getGridSize()[1]-1) + 1; // One more than max distance
+                Unit unitToDispatch;
+                int newTaxiCab;
+                for (Unit unit : units) {
+                    if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
+                        newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
+                        if (newTaxiCab > taxiCabDist) {
+                            taxiCabDist = newTaxiCab;
+                            unitToDispatch = unit;
+                        }
+                    }
+                }
+
+
+            }
+        }
     }
 
     @Override

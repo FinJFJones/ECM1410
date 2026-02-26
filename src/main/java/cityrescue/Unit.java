@@ -55,7 +55,13 @@ public abstract class Unit {
         }
 
     }
+
+    public boolean canHandle() {
+        return false;
+    }
 }
+
+// TODO: implement canHandle() override
 
 class Ambulance extends Unit {
     public Ambulance(int Id, int stationId, UnitType type) {
