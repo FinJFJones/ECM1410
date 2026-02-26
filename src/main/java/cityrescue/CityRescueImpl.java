@@ -1,6 +1,7 @@
 package cityrescue;
 
 import cityrescue.enums.IncidentType;
+import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
 import cityrescue.exceptions.IDNotRecognisedException;
 import cityrescue.exceptions.InvalidCapacityException;
@@ -164,8 +165,10 @@ public class CityRescueImpl implements CityRescue {
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
         if (!Utils.linearSearch(getUnitIds(), unitId)) { throw new IDNotRecognisedException("Unit does not exist."); }
         if (!Utils.linearSearch(getStationIds(), newStationId)) { throw new IDNotRecognisedException("Station does not exist."); }
-        if (units[unitId-1]) // unit needs state
+        if (stations[newStationId-1].numUnits == stations[newStationId-1].maxUnits) { throw new IllegalStateException("Station is full."); }
+        if (units[unitId-1].status == UnitStatus.IDLE) { throw new IllegalStateException("Unit is not idle."); }
         units[unitId-1].homeStationId = newStationId;
+        units[unitId-1].loc = stations[newStationId-1].loc.clone();
     }
 
     @Override
