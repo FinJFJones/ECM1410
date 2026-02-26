@@ -217,8 +217,23 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String viewUnit(int unitId) throws IDNotRecognisedException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        // U#2 TYPE=FIRE_ENGINE HOME=2 LOC=(3,1) STATUS=AT_SCENE INCIDENT=1 WORK=2
+        if (!Utils.linearSearch(getUnitIds(), unitId)){
+            throw new IDNotRecognisedException("UnitID not found.");
+        }
+        Unit unit = units[unitId];
+
+        String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%d WORK=",
+                                        unitId,
+                                        unit.type,
+                                        unit.homeStationId,
+                                        unit.loc[0],
+                                        unit.loc[1],
+                                        unit.status,
+                                        unit.incidentID // TODO: add WORK
+                                        );
+
+        return message;
     }
 
     @Override
