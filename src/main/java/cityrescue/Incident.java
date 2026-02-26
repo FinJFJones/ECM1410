@@ -9,6 +9,7 @@ public class Incident {
     int[] loc;
     int severity;
     int Id;
+    int ticksLeft;
 
     public Incident(IncidentType incidentType, int severity, int[] loc, int Id){
         this.incidentType = incidentType;

@@ -1,9 +1,9 @@
 package cityrescue;
 
+import cityrescue.enums.IncidentStatus;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
-import cityrescue.enums.IncidentStatus;
 import cityrescue.exceptions.IDNotRecognisedException;
 import cityrescue.exceptions.InvalidCapacityException;
 import cityrescue.exceptions.InvalidGridException;
@@ -305,7 +305,8 @@ public class CityRescueImpl implements CityRescue {
         for (Unit unit : units){
             if (unit.incidentID == incidentId){
                 unitId = unit.Id;
-            }}
+            }
+        }
 
         String message = String.format("I#%d TYPE=%s SEV=%d LOC=(%d,%d) STATUS=%s UNIT=%d",
                                         incidentId,
@@ -328,8 +329,35 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void tick() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        tick++;
+        for (Unit unit : units) {
+            if (unit.status == UnitStatus.EN_ROUTE) {
+                unit.move();
+                if (unit.loc == incidents[unit.incidentID-1].loc) {
+                    unit.status = UnitStatus.AT_SCENE;
+                    incidents[unit.incidentID-1].incidentStatus = IncidentStatus.IN_PROGRESS;
+                    incidents[unit.incidentID-1].ticksLeft = unit.ticksToResolve;
+                }
+            }
+        }
+        for (Incident incident : incidents) {
+            if (incident.incidentStatus == IncidentStatus.IN_PROGRESS){
+                incident.ticksLeft--;
+            }
+        }
+        for (Incident incident : incidents) {
+            if (incident.ticksLeft == 0) {
+                incident.incidentStatus = IncidentStatus.RESOLVED;
+
+                int unitId = -1;
+                for (Unit unit : units){
+                    if (unit.incidentID == incident.Id){
+                        unitId = unit.Id;
+                    }
+                }
+                units[unitId-1].status = UnitStatus.IDLE;
+            }
+        }
     }
 
     @Override
@@ -339,6 +367,7 @@ public class CityRescueImpl implements CityRescue {
     }
 
     public CityRescueImpl saveState() {
-
+        // TODO: implement
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }

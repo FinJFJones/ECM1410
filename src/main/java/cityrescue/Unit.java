@@ -21,6 +21,10 @@ public abstract class Unit {
         this.incidentID = -1;
         this.status = UnitStatus.IDLE;
     }
+
+    public void move() {
+        
+    }
 }
 
 class Ambulance extends Unit {
