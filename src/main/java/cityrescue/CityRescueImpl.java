@@ -198,7 +198,7 @@ public class CityRescueImpl implements CityRescue {
         else if (units[unitId-1].status == UnitStatus.OUT_OF_SERVICE) {
             units[unitId-1].status = UnitStatus.IDLE;
         }
-    
+
     }
 
     @Override
@@ -248,8 +248,23 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] incidentIds = getIncidentIds();
+
+        if (!Utils.linearSearch(incidentIds,incidentId)){
+            throw new IDNotRecognisedException("IncidentID not found.");
+        }
+
+        Incident incident = incidents[incidentId];
+
+        if (newSeverity > 5 || newSeverity < 1){
+            throw new InvalidSeverityException("Severity not in range 1-5.");
+        }
+
+        if ((incident.incidentStatus == IncidentStatus.CANCELLED) || (incident.incidentStatus == IncidentStatus.RESOLVED)){//if cancelled or resolved
+            throw new IllegalStateException("Incident status must not be CANCELLED or RESOLVED.");
+        }
+
+        incidents[incidentId].severity = newSeverity;
     }
 
     @Override
