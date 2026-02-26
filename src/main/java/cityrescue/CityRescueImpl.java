@@ -198,7 +198,7 @@ public class CityRescueImpl implements CityRescue {
         else if (units[unitId-1].status == UnitStatus.OUT_OF_SERVICE) {
             units[unitId-1].status = UnitStatus.IDLE;
         }
-         
+    
     }
 
     @Override
@@ -274,12 +274,12 @@ public class CityRescueImpl implements CityRescue {
         }
         Incident incident = incidents[incidentId];
 
-        int unitId;
+        int unitId = -1;
 
         for (Unit unit : units){
             if (unit.incidentID == incidentId){
                 unitId = unit.Id;
-            }
+            }}
 
         String message = String.format("I#%d TYPE=%s SEV=%d LOC=(%d,%d) STATUS=%s UNIT=%d",
                                         incidentId,
@@ -289,7 +289,9 @@ public class CityRescueImpl implements CityRescue {
                                         incident.loc[1],
                                         incident.incidentStatus,
                                         unitId
-        );
+                                        );
+
+        return message;
     }
 
     @Override
