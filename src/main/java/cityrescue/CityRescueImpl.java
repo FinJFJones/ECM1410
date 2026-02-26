@@ -2,6 +2,7 @@ package cityrescue;
 
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitType;
+import cityrescue.enums.IncidentStatus;
 import cityrescue.exceptions.IDNotRecognisedException;
 import cityrescue.exceptions.InvalidCapacityException;
 import cityrescue.exceptions.InvalidGridException;
@@ -202,8 +203,14 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] incidentIds = getIncidentIds();
+        if (!Utils.linearSearch(incidentIds,incidentId)){
+            throw new IDNotRecognisedException("IncidentID not found.");
+        }
+        Incident incident = incidents[incidentId];
+        if (!(incident.incidentStatus == IncidentStatus.REPORTED) && !(incident.incidentStatus == IncidentStatus.DISPATCHED)){//if not reported or dispatched
+            throw new IllegalStateException("Incident status must be REPORTED or DISPATCHED.");
+        }
     }
 
     @Override
