@@ -1,10 +1,12 @@
 package cityrescue;
 
+import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
 
 public abstract class Unit {
     int Id;
     UnitType type;
+    UnitStatus status;
     int homeStationId;
     int[] loc;
 
@@ -13,6 +15,7 @@ public abstract class Unit {
     public Unit(int stationId, UnitType type) {
         this.homeStationId = stationId;
         this.type = type;
+        this.status = UnitStatus.IDLE;
     }
 }
 

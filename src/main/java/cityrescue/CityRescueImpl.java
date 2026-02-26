@@ -1,6 +1,7 @@
 package cityrescue;
 
 import cityrescue.enums.IncidentType;
+import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
 import cityrescue.enums.IncidentStatus;
 import cityrescue.exceptions.IDNotRecognisedException;
@@ -159,16 +160,25 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] Ids = getUnitIds();
+        if (!Utils.linearSearch(Ids, unitId)){
+            throw new IDNotRecognisedException("No such unit Id.");
+        }
+        if (units[unitId-1].status == UnitStatus.AT_SCENE || units[unitId-1].status == UnitStatus.EN_ROUTE) {
+            throw new IllegalStateException("Unit is either en route or at scene.");
+        }
+
+        stations[unitId-1] = null;
     }
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
         if (!Utils.linearSearch(getUnitIds(), unitId)) { throw new IDNotRecognisedException("Unit does not exist."); }
         if (!Utils.linearSearch(getStationIds(), newStationId)) { throw new IDNotRecognisedException("Station does not exist."); }
-        if (units[unitId-1]) // unit needs state
+        if (stations[newStationId-1].numUnits == stations[newStationId-1].maxUnits) { throw new IllegalStateException("Station is full."); }
+        if (units[unitId-1].status == UnitStatus.IDLE) { throw new IllegalStateException("Unit is not idle."); }
         units[unitId-1].homeStationId = newStationId;
+        units[unitId-1].loc = stations[newStationId-1].loc.clone();
     }
 
     @Override
