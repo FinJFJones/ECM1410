@@ -7,6 +7,7 @@ public abstract class Unit {
     int Id;
     UnitType type;
     UnitStatus status;
+    int incidentID;
     int homeStationId;
     int[] loc;
 
