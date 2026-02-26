@@ -17,6 +17,7 @@ public abstract class Unit {
         this.Id = Id;
         this.homeStationId = stationId;
         this.type = type;
+        this.incidentID = -1;
         this.status = UnitStatus.IDLE;
     }
 }
