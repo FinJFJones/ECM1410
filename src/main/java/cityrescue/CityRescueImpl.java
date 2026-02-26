@@ -31,6 +31,7 @@ public class CityRescueImpl implements CityRescue {
 
     Unit[] units;
     int unitCounter;
+    int unitRemoveCounter;
 
     Incident[] incidents;
     int incidentCounter;
@@ -181,20 +182,37 @@ public class CityRescueImpl implements CityRescue {
         if (!Utils.linearSearch(getStationIds(), newStationId)) { throw new IDNotRecognisedException("Station does not exist."); }
         if (stations[newStationId-1].numUnits == stations[newStationId-1].maxUnits) { throw new IllegalStateException("Station is full."); }
         if (units[unitId-1].status == UnitStatus.IDLE) { throw new IllegalStateException("Unit is not idle."); }
+
         units[unitId-1].homeStationId = newStationId;
         units[unitId-1].loc = stations[newStationId-1].loc.clone();
     }
 
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!Utils.linearSearch(getUnitIds(), unitId)) { throw new IDNotRecognisedException("Unit does not exist."); }
+        if (outOfService && !(units[unitId-1].status == UnitStatus.IDLE)) { throw new IllegalStateException("Unit is not idle."); }
+
+        if (outOfService) {
+            units[unitId-1].status = UnitStatus.OUT_OF_SERVICE;
+        }
+        else if (units[unitId-1].status == UnitStatus.OUT_OF_SERVICE) {
+            units[unitId-1].status = UnitStatus.IDLE;
+        }
+         
     }
 
     @Override
     public int[] getUnitIds() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] unitIds = new int[(unitCounter - unitRemoveCounter)];
+        int IdsIndex = 0;
+
+        for (int i = 0; i < unitCounter; i++) {
+            if (units[i] != null) {
+                unitIds[IdsIndex] = units[i].Id;
+                IdsIndex++;
+            }
+        }
+        return unitIds;
     }
 
     @Override
