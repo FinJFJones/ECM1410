@@ -141,13 +141,13 @@ public class CityRescueImpl implements CityRescue {
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         switch (type) {
             case AMBULANCE:
-                units[unitCounter] = new Ambulance(stationId);
+                units[unitCounter] = new Ambulance(stationId, type);
                 break;
             case FIRE_ENGINE:
-                units[unitCounter] = new FireEngine(stationId);
+                units[unitCounter] = new FireEngine(stationId, type);
                 break;
             case POLICE_CAR:
-                units[unitCounter] = new PoliceCar(stationId);
+                units[unitCounter] = new PoliceCar(stationId, type);
                 break;
         }
         unitCounter++;
@@ -162,9 +162,10 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
-        if (Utils.linearSearch(getStationIds(), newStationId)) {
-            units[unitId-1].homeStationId = newStationId;
-        }
+        if (!Utils.linearSearch(getUnitIds(), unitId)) { throw new IDNotRecognisedException("Unit does not exist."); }
+        if (!Utils.linearSearch(getStationIds(), newStationId)) { throw new IDNotRecognisedException("Station does not exist."); }
+        if (units[unitId-1]) // unit needs state
+        units[unitId-1].homeStationId = newStationId;
     }
 
     @Override
