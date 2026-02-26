@@ -8,11 +8,13 @@ public class Incident {
     IncidentStatus incidentStatus;
     int[] loc;
     int severity;
+    int Id;
 
-    public Incident(IncidentType incidentType, int severity, int[] loc){
+    public Incident(IncidentType incidentType, int severity, int[] loc, int Id){
         this.incidentType = incidentType;
         this.incidentStatus = IncidentStatus.REPORTED;
         this.severity = severity;
         this.loc = loc;
+        this.Id = Id;
     }
 }

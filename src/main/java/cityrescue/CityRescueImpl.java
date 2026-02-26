@@ -1,5 +1,7 @@
 package cityrescue;
 
+import java.io.Console;
+
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
@@ -45,6 +47,7 @@ public class CityRescueImpl implements CityRescue {
 
         stations = new Station[20];
         stationCounter = 0;
+        stationRemoveCounter = 0;
 
         units = new Unit[50];
         unitCounter = 0;
@@ -86,7 +89,7 @@ public class CityRescueImpl implements CityRescue {
         }
         if (cityMap.isInBounds(x, y)){
             int[] loc = new int[]{x,y};
-            stations[stationCounter] = new Station(name,stationCounter,loc);
+            stations[stationCounter] = new Station(name,stationCounter+1,loc);
             return stationCounter++;
         }
         else{
@@ -107,6 +110,7 @@ public class CityRescueImpl implements CityRescue {
         }
 
         stations[stationId-1] = null;
+        stationRemoveCounter++;
     }
 
     @Override
@@ -207,7 +211,8 @@ public class CityRescueImpl implements CityRescue {
         if (severity > 5 || severity < 1){
             throw new InvalidSeverityException("Severity not in range 1-5.");
         }
-        incidents[incidentCounter] = new Incident(type,severity,new int[]{x,y});
+
+        incidents[incidentCounter] = new Incident(type,severity,new int[]{x,y},incidentCounter+1);
         return incidentCounter++;
     }
 
@@ -231,7 +236,7 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int[] getIncidentIds() {
-        int[] IncidentIds = new int[(incidentCounter - incidentRemoveCounter)];
+        int[] incidentIds = new int[(incidentCounter - incidentRemoveCounter)];
         int IdsIndex = 0;
 
         for (int i = 0; i < incidentCounter; i++) {
@@ -245,8 +250,28 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String viewIncident(int incidentId) throws IDNotRecognisedException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        // I#1 TYPE=FIRE SEV=4 LOC=(3,1) STATUS=IN_PROGRESS UNIT=2
+        if (!Utils.linearSearch(getIncidentIds(),incidentId)){
+            throw new IDNotRecognisedException("IncidentID not found.");
+        }
+        Incident incident = incidents[incidentId];
+
+        int unitId;
+
+        for (Unit unit : units){
+            if (unit.incidentID == incidentId){
+                unitId = unit.Id;
+            }
+
+        String message = String.format("I#%d TYPE=%s SEV=%d LOC=(%d,%d) STATUS=%s UNIT=%d",
+                                        incidentId,
+                                        incident.incidentType,
+                                        incident.severity,
+                                        incident.loc[0],
+                                        incident.loc[1],
+                                        incident.incidentStatus,
+                                        unitId
+        );
     }
 
     @Override
