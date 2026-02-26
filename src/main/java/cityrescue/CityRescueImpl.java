@@ -332,7 +332,7 @@ public class CityRescueImpl implements CityRescue {
         tick++;
         for (Unit unit : units) {
             if (unit.status == UnitStatus.EN_ROUTE) {
-                unit.move();
+                unit.move(cityMap,incidents);
                 if (unit.loc == incidents[unit.incidentID-1].loc) {
                     unit.status = UnitStatus.AT_SCENE;
                     incidents[unit.incidentID-1].incidentStatus = IncidentStatus.IN_PROGRESS;
