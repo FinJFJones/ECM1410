@@ -13,8 +13,8 @@ public class Station {
         this.name = name;
         this.Id = Id;
         this.loc = loc;
-        this.maxUnits = 200; //worst case has 200 units (all of the possible units)
-        this.units = new Unit[200];
+        this.maxUnits = 50; //worst case has 50 units (all of the possible units)
+        this.units = new Unit[50];
         this.numUnits = 0;
     }
 }

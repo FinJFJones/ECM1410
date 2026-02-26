@@ -187,8 +187,14 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!cityMap.isInBounds(x, y)){
+            throw new InvalidLocationException("Location not in bounds.");
+        }
+        if (severity > 5 || severity < 1){
+            throw new InvalidSeverityException("Severity not in range 1-5.");
+        }
+        incidents[incidentCounter] = new Incident(type,severity,new int[]{x,y});
+        return incidentCounter++;
     }
 
     @Override
