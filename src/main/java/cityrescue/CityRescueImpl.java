@@ -157,8 +157,15 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] Ids = getUnitIds();
+        if (!Utils.linearSearch(Ids, unitId)){
+            throw new IDNotRecognisedException("No such unit Id.");
+        }
+        if (units[unitId-1].status == UnitStatus.AT_SCENE || units[unitId-1].status == UnitStatus.EN_ROUTE) {
+            throw new IllegalStateException("Unit is either en route or at scene.");
+        }
+
+        stations[unitId-1] = null;
     }
 
     @Override
