@@ -1,5 +1,6 @@
 package cityrescue;
 
+import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
 
@@ -10,6 +11,7 @@ public abstract class Unit {
     UnitStatus status;
     int incidentID;
     int homeStationId;
+    IncidentType[] handleableIncidences;
     int[] loc;
 
     // implement state (e.g idle)
@@ -20,6 +22,7 @@ public abstract class Unit {
         this.type = type;
         this.incidentID = -1;
         this.status = UnitStatus.IDLE;
+        this.handleableIncidences = new IncidentType[0];
     }
 
     public void move(CityMap cityMap,Incident[] incidents) {
@@ -56,17 +59,21 @@ public abstract class Unit {
 
     }
 
-    public boolean canHandle() {
+    public boolean canHandle(IncidentType incidentType) {
+        for (IncidentType elem : this.handleableIncidences) {
+            if (elem == incidentType){
+                return true;
+            }
+        }
         return false;
     }
 }
-
-// TODO: implement canHandle() override
 
 class Ambulance extends Unit {
     public Ambulance(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
         this.ticksToResolve = 2;
+        this.handleableIncidences = new IncidentType[] {IncidentType.MEDICAL};
     }
 }
 
@@ -74,6 +81,7 @@ class FireEngine extends Unit {
     public FireEngine(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
         this.ticksToResolve = 4;
+        this.handleableIncidences = new IncidentType[] {IncidentType.FIRE};
     }
 }
 
@@ -81,5 +89,6 @@ class PoliceCar extends Unit {
     public PoliceCar(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
         this.ticksToResolve = 3;
+        this.handleableIncidences = new IncidentType[] {IncidentType.CRIME};
     }
 }

@@ -326,7 +326,7 @@ public class CityRescueImpl implements CityRescue {
         for (Incident incident : incidents) {
             if (incident.incidentStatus == IncidentStatus.REPORTED) {
                 int taxiCabDist = (getGridSize()[0]-1 + getGridSize()[1]-1) + 1; // One more than max distance
-                Unit unitToDispatch;
+                Unit unitToDispatch = null;
                 int newTaxiCab;
                 for (Unit unit : units) {
                     if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
@@ -337,8 +337,9 @@ public class CityRescueImpl implements CityRescue {
                         }
                     }
                 }
-
-
+                unitToDispatch.status = UnitStatus.EN_ROUTE; // TODO: Edit logic here
+                unitToDispatch.incidentID = incident.Id;
+                incident.incidentStatus = IncidentStatus.DISPATCHED;
             }
         }
     }
