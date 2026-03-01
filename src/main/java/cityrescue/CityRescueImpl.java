@@ -359,11 +359,13 @@ public class CityRescueImpl implements CityRescue {
                 Unit unitToDispatch = null;
                 int newTaxiCab;
                 for (Unit unit : units) {
-                    if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
-                        newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
-                        if (newTaxiCab > taxiCabDist) {
-                            taxiCabDist = newTaxiCab;
-                            unitToDispatch = unit;
+                    if (unit != null) {
+                        if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
+                            newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
+                            if (newTaxiCab > taxiCabDist) {
+                                taxiCabDist = newTaxiCab;
+                                unitToDispatch = unit;
+                            }
                         }
                     }
                 }
