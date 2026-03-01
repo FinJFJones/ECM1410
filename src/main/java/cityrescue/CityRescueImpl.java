@@ -94,7 +94,8 @@ public class CityRescueImpl implements CityRescue {
         if (cityMap.isInBounds(x, y)){
             int[] loc = new int[]{x,y};
             stations[stationCounter] = new Station(name,stationCounter+1,loc);
-            return stationCounter++;
+            stationCounter++;
+            return stationCounter;
         }
         else{
             throw new InvalidLocationException("Location not in bounds.");
@@ -257,7 +258,8 @@ public class CityRescueImpl implements CityRescue {
         }
 
         incidents[incidentCounter] = new Incident(type,severity,new int[]{x,y},incidentCounter+1);
-        return incidentCounter++;
+        incidentCounter++;
+        return incidentCounter;
     }
 
     @Override
