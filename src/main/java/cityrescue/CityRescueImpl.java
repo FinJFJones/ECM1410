@@ -49,9 +49,13 @@ public class CityRescueImpl implements CityRescue {
 
         units = new Unit[50];
         unitCounter = 0;
+        unitRemoveCounter = 0;
 
         incidents = new Incident[200];
         incidentCounter = 0;
+        incidentRemoveCounter = 0;
+
+        obstacleCounter = 0;
 
     }
 
