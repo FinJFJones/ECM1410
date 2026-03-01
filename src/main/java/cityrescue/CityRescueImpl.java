@@ -35,8 +35,6 @@ public class CityRescueImpl implements CityRescue {
     int incidentRemoveCounter;
 
     int obstacleCounter;
-    SaveState saveState;
-
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
