@@ -35,6 +35,11 @@ public class CityRescueImpl implements CityRescue {
     int incidentRemoveCounter;
 
     int obstacleCounter;
+<<<<<<< Updated upstream
+=======
+    SaveState saveState;
+
+>>>>>>> Stashed changes
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
@@ -404,16 +409,23 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public String getStatus() {
         // TICK=7
-            // STATIONS=2 UNITS=3 INCIDENTS=2 OBSTACLES=5
-            // INCIDENTS
-            // I#1 TYPE=FIRE SEV=4 LOC=(3,1) STATUS=IN_PROGRESS UNIT=2
-            // I#2 TYPE=CRIME SEV=2 LOC=(0,4) STATUS=REPORTED UNIT=-
-            // UNITS
-            // U#1 TYPE=AMBULANCE HOME=1 LOC=(1,1) STATUS=IDLE INCIDENT=-
-            // U#2 TYPE=FIRE_ENGINE HOME=2 LOC=(3,1) STATUS=AT_SCENE INCIDENT=1 WORK=2
-            // U#3 TYPE=POLICE_CAR HOME=1 LOC=(1,2) STATUS=EN_ROUTE INCIDENT=2
+        // STATIONS=2 UNITS=3 INCIDENTS=2 OBSTACLES=5
+        // INCIDENTS
+        // I#1 TYPE=FIRE SEV=4 LOC=(3,1) STATUS=IN_PROGRESS UNIT=2
+        // I#2 TYPE=CRIME SEV=2 LOC=(0,4) STATUS=REPORTED UNIT=-
+        // UNITS
+        // U#1 TYPE=AMBULANCE HOME=1 LOC=(1,1) STATUS=IDLE INCIDENT=-
+        // U#2 TYPE=FIRE_ENGINE HOME=2 LOC=(3,1) STATUS=AT_SCENE INCIDENT=1 WORK=2
+        // U#3 TYPE=POLICE_CAR HOME=1 LOC=(1,2) STATUS=EN_ROUTE INCIDENT=2
+
         String tick_msg = String.format("TICK=#%d\n",tick);
-        String count_msg = String.format("STATIONS=%d UNITS=%d INCIDENTS=%d OBSTACLES=%d\n",stationCounter,unitCounter,incidentCounter,obstacleCounter);
+        String count_msg = String.format(
+        "STATIONS=%d UNITS=%d INCIDENTS=%d OBSTACLES=%d\n",
+        stationCounter,
+        unitCounter,
+        incidentCounter,
+        obstacleCounter
+        );
 
         String incident_msg = "INCIDENTS\n";
         for (int Id=0 ; Id<incidentCounter ; Id++){
@@ -436,5 +448,22 @@ public class CityRescueImpl implements CityRescue {
         }
 
         return (tick_msg+count_msg+incident_msg+unit_msg);
+<<<<<<< Updated upstream
+=======
+        }
+
+    public void saveState() {
+        saveState = new SaveState(tick,
+                                cityMap,
+                                stations,
+                                stationCounter,
+                                stationRemoveCounter,
+                                units,
+                                unitCounter,
+                                unitRemoveCounter,
+                                incidents,
+                                incidentCounter,
+                                incidentRemoveCounter);
+>>>>>>> Stashed changes
     }
 }
