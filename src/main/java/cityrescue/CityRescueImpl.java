@@ -279,8 +279,10 @@ public class CityRescueImpl implements CityRescue {
         int unitId = -1;
 
         for (Unit unit : units){
-            if (unit.incidentID == incidentId){
-                unitId = unit.Id;
+            if (unit != null) {
+                if (unit.incidentID == incidentId){
+                    unitId = unit.Id;
+                }
             }
         }
 
@@ -333,8 +335,10 @@ public class CityRescueImpl implements CityRescue {
         int unitId = -1;
 
         for (Unit unit : units){
-            if (unit.incidentID == incidentId){
-                unitId = unit.Id;
+            if (unit != null) {
+                if (unit.incidentID == incidentId){
+                    unitId = unit.Id;
+                }
             }
         }
 
@@ -354,24 +358,28 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void dispatch() {
         for (Incident incident : incidents) {
-            if (incident.incidentStatus == IncidentStatus.REPORTED) {
-                int taxiCabDist = (getGridSize()[0]-1 + getGridSize()[1]-1) + 1; // One more than max distance
-                Unit unitToDispatch = null;
-                int newTaxiCab;
-                for (Unit unit : units) {
-                    if (unit != null) {
-                        if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
-                            newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
-                            if (newTaxiCab > taxiCabDist) {
-                                taxiCabDist = newTaxiCab;
-                                unitToDispatch = unit;
+            if (incident != null) {
+                if (incident.incidentStatus == IncidentStatus.REPORTED) {
+                    int taxiCabDist = (getGridSize()[0]-1 + getGridSize()[1]-1) + 1; // One more than max distance
+                    Unit unitToDispatch = null;
+                    int newTaxiCab;
+                    for (Unit unit : units) {
+                        if (unit != null) {
+                            if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
+                                newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
+                                if (newTaxiCab > taxiCabDist) {
+                                    taxiCabDist = newTaxiCab;
+                                    unitToDispatch = unit;
+                                }
                             }
                         }
                     }
+                    if (unitToDispatch != null) {
+                        unitToDispatch.status = UnitStatus.EN_ROUTE; // TODO: Edit logic here (unitToDispatch may not exist)
+                        unitToDispatch.incidentID = incident.Id;
+                        incident.incidentStatus = IncidentStatus.DISPATCHED;
+                    }
                 }
-                unitToDispatch.status = UnitStatus.EN_ROUTE; // TODO: Edit logic here (unitToDispatch may not exist)
-                unitToDispatch.incidentID = incident.Id;
-                incident.incidentStatus = IncidentStatus.DISPATCHED;
             }
         }
     }
@@ -380,31 +388,39 @@ public class CityRescueImpl implements CityRescue {
     public void tick() {
         tick++;
         for (Unit unit : units) {
-            if (unit.status == UnitStatus.EN_ROUTE) {
-                unit.move(cityMap,incidents);
-                if (unit.loc == incidents[unit.incidentID-1].loc) {
-                    unit.status = UnitStatus.AT_SCENE;
-                    incidents[unit.incidentID-1].incidentStatus = IncidentStatus.IN_PROGRESS;
-                    incidents[unit.incidentID-1].ticksLeft = unit.ticksToResolve;
-                }
-            }
-        }
-        for (Incident incident : incidents) {
-            if (incident.incidentStatus == IncidentStatus.IN_PROGRESS){
-                incident.ticksLeft--;
-            }
-        }
-        for (Incident incident : incidents) {
-            if (incident.ticksLeft == 0) {
-                incident.incidentStatus = IncidentStatus.RESOLVED;
-
-                int unitId = -1;
-                for (Unit unit : units){
-                    if (unit.incidentID == incident.Id){
-                        unitId = unit.Id;
+            if (unit != null) {
+                if (unit.status == UnitStatus.EN_ROUTE) {
+                    unit.move(cityMap,incidents);
+                    if (unit.loc == incidents[unit.incidentID-1].loc) {
+                        unit.status = UnitStatus.AT_SCENE;
+                        incidents[unit.incidentID-1].incidentStatus = IncidentStatus.IN_PROGRESS;
+                        incidents[unit.incidentID-1].ticksLeft = unit.ticksToResolve;
                     }
                 }
-                units[unitId-1].status = UnitStatus.IDLE;
+            }
+        }
+        for (Incident incident : incidents) {
+            if (incident != null) {
+                if (incident.incidentStatus == IncidentStatus.IN_PROGRESS){
+                    incident.ticksLeft--;
+                }
+            }
+        }
+        for (Incident incident : incidents) {
+            if (incident != null) {
+                if (incident.ticksLeft == 0) {
+                    incident.incidentStatus = IncidentStatus.RESOLVED;
+
+                    int unitId = -1;
+                    for (Unit unit : units){
+                        if (unit != null) {
+                            if (unit.incidentID == incident.Id){
+                                unitId = unit.Id;
+                            }
+                        }
+                    }
+                    units[unitId-1].status = UnitStatus.IDLE;
+                }
             }
         }
     }
