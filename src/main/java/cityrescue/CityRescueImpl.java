@@ -34,6 +34,8 @@ public class CityRescueImpl implements CityRescue {
     int incidentCounter;
     int incidentRemoveCounter;
 
+    int obstacleCounter;
+
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
         if (width < 1 || height < 1){
@@ -63,6 +65,7 @@ public class CityRescueImpl implements CityRescue {
     public void addObstacle(int x, int y) throws InvalidLocationException {
         if (cityMap.isInBounds(x, y)){
             cityMap.blocked[x][y] = true;
+            obstacleCounter++;
         }
         else{
             throw new InvalidLocationException("Location not in bounds.");
@@ -73,6 +76,7 @@ public class CityRescueImpl implements CityRescue {
     public void removeObstacle(int x, int y) throws InvalidLocationException {
         if (cityMap.isInBounds(x, y)){
             cityMap.blocked[x][y] = false;
+            obstacleCounter--;
         }
         else{
             throw new InvalidLocationException("Location not in bounds.");
@@ -379,9 +383,40 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String getStatus() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
+            // TICK=7
+            // STATIONS=2 UNITS=3 INCIDENTS=2 OBSTACLES=5
+            // INCIDENTS
+            // I#1 TYPE=FIRE SEV=4 LOC=(3,1) STATUS=IN_PROGRESS UNIT=2
+            // I#2 TYPE=CRIME SEV=2 LOC=(0,4) STATUS=REPORTED UNIT=-
+            // UNITS
+            // U#1 TYPE=AMBULANCE HOME=1 LOC=(1,1) STATUS=IDLE INCIDENT=-
+            // U#2 TYPE=FIRE_ENGINE HOME=2 LOC=(3,1) STATUS=AT_SCENE INCIDENT=1 WORK=2
+            // U#3 TYPE=POLICE_CAR HOME=1 LOC=(1,2) STATUS=EN_ROUTE INCIDENT=2
+        String tick_msg = String.format("TICK=#%d\n",tick);
+        String count_msg = String.format("STATIONS=%d UNITS=%d INCIDENTS=%d OBSTACLES=%d\n",stationCounter,unitCounter,incidentCounter,obstacleCounter);
+
+        String incident_msg = "INCIDENTS\n";
+        for (int Id=0 ; Id<incidentCounter ; Id++){
+            if (incidents[Id] != null){
+                try {
+                    incident_msg = incident_msg + viewIncident(Id) + "\n";
+                } catch (IDNotRecognisedException ex) {
+                }
+            }
+        }
+
+        String unit_msg = "UNITS\n";
+        for (int Id=0 ; Id<unitCounter ; Id++){
+            if (units[Id] != null){
+                try {
+                    unit_msg = unit_msg + viewUnit(Id) + "\n";
+                } catch (IDNotRecognisedException ex) {
+                }
+            }
+        }
+
+        return (tick_msg+count_msg+incident_msg+unit_msg);
+        }
 
     public CityRescueImpl saveState() {
         // TODO: implement
