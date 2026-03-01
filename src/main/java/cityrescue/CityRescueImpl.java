@@ -172,6 +172,7 @@ public class CityRescueImpl implements CityRescue {
             default:
                 throw new InvalidUnitException("Unit type invalid.");
         }
+        units[unitCounter-1].loc = stations[stationId-1].loc;
         return unitCounter;
     }
 
