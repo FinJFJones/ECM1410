@@ -255,7 +255,7 @@ public class CityRescueImpl implements CityRescue {
         if (!Utils.linearSearch(incidentIds,incidentId)){
             throw new IDNotRecognisedException("IncidentID not found.");
         }
-        Incident incident = incidents[incidentId];
+        Incident incident = incidents[incidentId-1];
         if (!(incident.incidentStatus == IncidentStatus.REPORTED) && !(incident.incidentStatus == IncidentStatus.DISPATCHED)){//if not reported or dispatched
             throw new IllegalStateException("Incident status must be REPORTED or DISPATCHED.");
         }
@@ -269,7 +269,7 @@ public class CityRescueImpl implements CityRescue {
             throw new IDNotRecognisedException("IncidentID not found.");
         }
 
-        Incident incident = incidents[incidentId];
+        Incident incident = incidents[incidentId-1];
 
         if (newSeverity > 5 || newSeverity < 1){
             throw new InvalidSeverityException("Severity not in range 1-5.");
@@ -279,7 +279,7 @@ public class CityRescueImpl implements CityRescue {
             throw new IllegalStateException("Incident status must not be CANCELLED or RESOLVED.");
         }
 
-        incidents[incidentId].severity = newSeverity;
+        incidents[incidentId-1].severity = newSeverity;
     }
 
     @Override
@@ -302,7 +302,7 @@ public class CityRescueImpl implements CityRescue {
         if (!Utils.linearSearch(getIncidentIds(),incidentId)){
             throw new IDNotRecognisedException("IncidentID not found.");
         }
-        Incident incident = incidents[incidentId];
+        Incident incident = incidents[incidentId-1];
 
         int unitId = -1;
 
