@@ -35,6 +35,8 @@ public class CityRescueImpl implements CityRescue {
     int incidentRemoveCounter;
 
     int obstacleCounter;
+    SaveState saveState;
+    
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
@@ -148,6 +150,12 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
+        if (!Utils.linearSearch(getStationIds(), stationId)){
+            throw new IDNotRecognisedException("Station ID does not exist.");
+        }
+        if (stations[stationId-1].maxUnits == stations[stationId-1].numUnits) {
+            throw new IllegalStateException("Station full.");
+        }
         unitCounter++;
         switch (type) {
             case AMBULANCE:
@@ -159,6 +167,8 @@ public class CityRescueImpl implements CityRescue {
             case POLICE_CAR:
                 units[unitCounter-1] = new PoliceCar(unitCounter, stationId, type);
                 break;
+            default:
+                throw new InvalidUnitException("Unit type invalid.");
         }
         return unitCounter;
     }
@@ -341,7 +351,7 @@ public class CityRescueImpl implements CityRescue {
                         }
                     }
                 }
-                unitToDispatch.status = UnitStatus.EN_ROUTE; // TODO: Edit logic here
+                unitToDispatch.status = UnitStatus.EN_ROUTE; // TODO: Edit logic here (unitToDispatch may not exist)
                 unitToDispatch.incidentID = incident.Id;
                 incident.incidentStatus = IncidentStatus.DISPATCHED;
             }
@@ -383,7 +393,7 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String getStatus() {
-            // TICK=7
+        // TICK=7
             // STATIONS=2 UNITS=3 INCIDENTS=2 OBSTACLES=5
             // INCIDENTS
             // I#1 TYPE=FIRE SEV=4 LOC=(3,1) STATUS=IN_PROGRESS UNIT=2
@@ -418,8 +428,17 @@ public class CityRescueImpl implements CityRescue {
         return (tick_msg+count_msg+incident_msg+unit_msg);
         }
 
-    public CityRescueImpl saveState() {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+    public void saveState() {
+        saveState = new SaveState(tick, 
+                                cityMap, 
+                                stations, 
+                                stationCounter, 
+                                stationRemoveCounter, 
+                                units, 
+                                unitCounter, 
+                                unitRemoveCounter, 
+                                incidents, 
+                                incidentCounter, 
+                                incidentRemoveCounter);
     }
 }
