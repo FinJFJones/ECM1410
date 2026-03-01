@@ -367,7 +367,7 @@ public class CityRescueImpl implements CityRescue {
                         if (unit != null) {
                             if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
                                 newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
-                                if (newTaxiCab > taxiCabDist) {
+                                if (newTaxiCab < taxiCabDist) {
                                     taxiCabDist = newTaxiCab;
                                     unitToDispatch = unit;
                                 }
