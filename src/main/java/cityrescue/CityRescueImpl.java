@@ -36,7 +36,7 @@ public class CityRescueImpl implements CityRescue {
 
     int obstacleCounter;
     SaveState saveState;
-    
+
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
@@ -438,19 +438,5 @@ public class CityRescueImpl implements CityRescue {
         }
 
         return (tick_msg+count_msg+incident_msg+unit_msg);
-        }
-
-    public void saveState() {
-        saveState = new SaveState(tick, 
-                                cityMap, 
-                                stations, 
-                                stationCounter, 
-                                stationRemoveCounter, 
-                                units, 
-                                unitCounter, 
-                                unitRemoveCounter, 
-                                incidents, 
-                                incidentCounter, 
-                                incidentRemoveCounter);
     }
 }
