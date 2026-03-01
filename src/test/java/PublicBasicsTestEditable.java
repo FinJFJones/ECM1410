@@ -9,7 +9,7 @@ import cityrescue.CityRescue;
 import cityrescue.CityRescueImpl;
 import cityrescue.exceptions.InvalidLocationException;
 
-public class PublicBasicsTest {
+public class PublicBasicsTestEditable {
     private CityRescue cr;
 
     @BeforeEach
