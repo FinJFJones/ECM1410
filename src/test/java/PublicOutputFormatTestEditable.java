@@ -30,6 +30,7 @@ public class PublicOutputFormatTestEditable {
         int u = cr.addUnit(st, UnitType.FIRE_ENGINE);
         int i = cr.reportIncident(IncidentType.FIRE, 3, 4, 4);
 
+        //System.out.println(cr.viewUnit(u));
         // Output prefix must match the coursework specification examples
         // (e.g., "U#2 ..." and "I#1 ...").
         assertTrue(cr.viewUnit(u).startsWith("U#"));

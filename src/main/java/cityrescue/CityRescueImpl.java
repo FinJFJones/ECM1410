@@ -233,7 +233,7 @@ public class CityRescueImpl implements CityRescue {
         if (!Utils.linearSearch(getUnitIds(), unitId)){
             throw new IDNotRecognisedException("UnitID not found.");
         }
-        Unit unit = units[unitId];
+        Unit unit = units[unitId-1];
 
         String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%d WORK=",
                                         unitId,
