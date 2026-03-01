@@ -1,5 +1,4 @@
 package cityrescue;
-
 import cityrescue.enums.IncidentStatus;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
@@ -35,11 +34,6 @@ public class CityRescueImpl implements CityRescue {
     int incidentRemoveCounter;
 
     int obstacleCounter;
-<<<<<<< Updated upstream
-=======
-    SaveState saveState;
-
->>>>>>> Stashed changes
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
@@ -418,7 +412,7 @@ public class CityRescueImpl implements CityRescue {
         // U#2 TYPE=FIRE_ENGINE HOME=2 LOC=(3,1) STATUS=AT_SCENE INCIDENT=1 WORK=2
         // U#3 TYPE=POLICE_CAR HOME=1 LOC=(1,2) STATUS=EN_ROUTE INCIDENT=2
 
-        String tick_msg = String.format("TICK=#%d\n",tick);
+        String tick_msg = String.format("TICK=%d\n",tick);
         String count_msg = String.format(
         "STATIONS=%d UNITS=%d INCIDENTS=%d OBSTACLES=%d\n",
         stationCounter,
@@ -448,22 +442,5 @@ public class CityRescueImpl implements CityRescue {
         }
 
         return (tick_msg+count_msg+incident_msg+unit_msg);
-<<<<<<< Updated upstream
-=======
-        }
-
-    public void saveState() {
-        saveState = new SaveState(tick,
-                                cityMap,
-                                stations,
-                                stationCounter,
-                                stationRemoveCounter,
-                                units,
-                                unitCounter,
-                                unitRemoveCounter,
-                                incidents,
-                                incidentCounter,
-                                incidentRemoveCounter);
->>>>>>> Stashed changes
     }
 }
