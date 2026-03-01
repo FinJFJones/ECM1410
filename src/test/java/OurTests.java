@@ -9,7 +9,7 @@ import cityrescue.CityRescue;
 import cityrescue.CityRescueImpl;
 import cityrescue.exceptions.InvalidLocationException;
 
-public class PublicBasicsTest {
+public class OurTests {
     private CityRescue cr;
 
     @BeforeEach
@@ -22,7 +22,6 @@ public class PublicBasicsTest {
     void initialise_setsGridSize_andResetsTick() {
         int[] sz = cr.getGridSize();
         assertArrayEquals(new int[]{5,5}, sz);
-        System.out.println(cr.getStatus());
         assertTrue(cr.getStatus().contains("TICK=0"));
     }
 
