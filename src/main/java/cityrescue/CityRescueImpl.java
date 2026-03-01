@@ -269,6 +269,18 @@ public class CityRescueImpl implements CityRescue {
         if (!(incident.incidentStatus == IncidentStatus.REPORTED) && !(incident.incidentStatus == IncidentStatus.DISPATCHED)){//if not reported or dispatched
             throw new IllegalStateException("Incident status must be REPORTED or DISPATCHED.");
         }
+
+        incident.incidentStatus = IncidentStatus.CANCELLED;
+
+        int unitId = -1;
+
+        for (Unit unit : units){
+            if (unit.incidentID == incidentId){
+                unitId = unit.Id;
+            }
+        }
+
+        units[unitId-1].status = UnitStatus.IDLE;
     }
 
     @Override
