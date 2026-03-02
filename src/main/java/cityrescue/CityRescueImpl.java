@@ -125,12 +125,12 @@ public class CityRescueImpl implements CityRescue {
             throw new IDNotRecognisedException("No such station Id.");
         }
         Station station = stations[stationId-1];
+        if (maxUnits < 1){
+            throw new InvalidCapacityException("Max units cannot be <1.");
+        }
 
         if (maxUnits < station.numUnits){
             throw new InvalidCapacityException("New capacity limit exceeds current station capacity.");
-        }
-        if (maxUnits < 1){
-            throw new InvalidCapacityException("Max units cannot be <1.");
         }
 
         station.maxUnits = maxUnits;
@@ -173,6 +173,7 @@ public class CityRescueImpl implements CityRescue {
                 throw new InvalidUnitException("Unit type invalid.");
         }
         units[unitCounter-1].loc = stations[stationId-1].loc;
+        stations[stationId-1].numUnits++;
         return unitCounter;
     }
 

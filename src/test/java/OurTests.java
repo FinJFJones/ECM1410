@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import cityrescue.CityRescue;
 import cityrescue.CityRescueImpl;
@@ -13,8 +12,4 @@ public class OurTests {
         cr.initialise(5, 5);
     }
 
-    @Test
-    void testName() {
-        
-    }
 }
