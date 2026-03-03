@@ -29,6 +29,12 @@ public class OurUnitTests {
         cr.transferUnit(1,2);
 
         cr.decommissionUnit(1);
+        try{
         cr.transferUnit(1, 2);
+        } catch (Exception e){
+            System.out.print("Expected behaviour: Unit does not exist (decommissioned)\n-> ");
+            System.out.println(e);
+        }
+        cr.transferUnit(2, 2);
     }
 }

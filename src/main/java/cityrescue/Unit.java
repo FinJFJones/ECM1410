@@ -41,6 +41,7 @@ public abstract class Unit {
                 if (!cityMap.blocked[newX][newY]){
                     if (Utils.taxiCab(incidentLoc, newLoc) < dist){
                         this.loc = newLoc;
+                        break;
                     }
                 isMoveLegal[i] = true;
                 }
