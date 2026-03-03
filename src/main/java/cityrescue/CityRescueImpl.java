@@ -505,7 +505,7 @@ public class CityRescueImpl implements CityRescue {
     public void dispatch() {
         for (Incident incident : incidents) {
             if (incident != null) {
-                if (incident.incidentStatus == IncidentStatus.REPORTED) {
+                if (incident.incidentStatus == IncidentStatus.REPORTED) { // Only care about incidences not yet acknowledged
                     int taxiCabDist = (getGridSize()[0]-1 + getGridSize()[1]-1) + 1; // One more than max distance
                     Unit unitToDispatch = null;
                     int newTaxiCab;
@@ -513,7 +513,7 @@ public class CityRescueImpl implements CityRescue {
                         if (unit != null) {
                             if (unit.canHandle(incident.incidentType) && unit.status != UnitStatus.OUT_OF_SERVICE && unit.status != UnitStatus.EN_ROUTE && unit.status != UnitStatus.AT_SCENE) {
                                 newTaxiCab = Utils.taxiCab(unit.loc, incident.loc);
-                                if (newTaxiCab < taxiCabDist) {
+                                if (newTaxiCab < taxiCabDist) { // Only < and not <= as UnitId is favoured
                                     taxiCabDist = newTaxiCab;
                                     unitToDispatch = unit;
                                 }
@@ -535,7 +535,7 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void tick() {
         tick++;
-        for (Unit unit : units) {
+        for (Unit unit : units) { // Move any enroute units
             if (unit != null) {
                 if (unit.status == UnitStatus.EN_ROUTE) {
                     unit.move(cityMap,incidents);
@@ -547,14 +547,14 @@ public class CityRescueImpl implements CityRescue {
                 }
             }
         }
-        for (Incident incident : incidents) {
+        for (Incident incident : incidents) { // Progress any incidents that are currently being handled
             if (incident != null) {
                 if (incident.incidentStatus == IncidentStatus.IN_PROGRESS){
                     incident.ticksLeft--;
                 }
             }
         }
-        for (Incident incident : incidents) {
+        for (Incident incident : incidents) { // Resolve any resolveable incidences and set the related units to IDLE
             if (incident != null) {
                 if (incident.incidentStatus == IncidentStatus.IN_PROGRESS){
                     if (incident.ticksLeft == 0) {
