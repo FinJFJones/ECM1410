@@ -6,7 +6,7 @@ import cityrescue.CityRescueImpl;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitType;
 
-public class GeneralTests {
+public class OurGeneralTests {
     private CityRescue cr;
 
     @BeforeEach
