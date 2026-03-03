@@ -15,9 +15,17 @@ public class CityMap {
         this.blocked = new boolean[this.w][this.h];
     }
 
+    /** 
+     * @return boolean
+     */
     public boolean isLegalMove() {
         throw new UnsupportedOperationException("Not implemented yet");
     }
+    /** 
+     * @param x
+     * @param y
+     * @return boolean
+     */
     public boolean isInBounds(int x, int y){
         if (x < 0 || x > (this.w -1)){
             return false;

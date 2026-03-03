@@ -25,6 +25,10 @@ public abstract class Unit {
         this.handleableIncidences = new IncidentType[0];
     }
 
+    /** 
+     * @param cityMap
+     * @param incidents
+     */
     public void move(CityMap cityMap,Incident[] incidents) {
         int[][] possible_moves = {{0,1},{1,0},{0,-1},{-1,0}};
         int[] incidentLoc = incidents[this.incidentID-1].loc;
@@ -64,6 +68,10 @@ public abstract class Unit {
         }
     }
 
+    /** 
+     * @param incidentType
+     * @return boolean
+     */
     public boolean canHandle(IncidentType incidentType) {
         for (IncidentType elem : this.handleableIncidences) {
             if (elem == incidentType){
