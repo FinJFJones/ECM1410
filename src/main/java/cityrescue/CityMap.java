@@ -1,7 +1,8 @@
 package cityrescue;
-// Blocked + Grid
-// Legal Move
 
+/**
+ * Class used for storing the blocked grid and data about the city, such as size.
+ */
 public class CityMap {
     int[] gridSize;
     int w;

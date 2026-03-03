@@ -1,5 +1,8 @@
 package cityrescue;
 
+/**
+ * Stores Station information. No methods.
+ */
 public class Station {
     String name;
     int Id;

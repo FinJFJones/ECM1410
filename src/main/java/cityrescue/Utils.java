@@ -1,5 +1,8 @@
 package cityrescue;
 
+/**
+ * Class containing useful generic methods used elsewhere.
+ */
 public class Utils {
     /** 
      * Finds an int in a list of ints with a linear search.
