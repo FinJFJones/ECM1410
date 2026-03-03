@@ -374,7 +374,7 @@ public class CityRescueImpl implements CityRescue {
             throw new IDNotRecognisedException("IncidentID not found.");
         }
         Incident incident = incidents[incidentId-1];
-        if (!(incident.incidentStatus == IncidentStatus.REPORTED) && !(incident.incidentStatus == IncidentStatus.DISPATCHED)){//if not reported or dispatched
+        if (!(incident.incidentStatus == IncidentStatus.REPORTED) && !(incident.incidentStatus == IncidentStatus.DISPATCHED)){
             throw new IllegalStateException("Incident status must be REPORTED or DISPATCHED.");
         }
 
@@ -390,7 +390,9 @@ public class CityRescueImpl implements CityRescue {
             }
         }
 
-        units[unitId-1].status = UnitStatus.IDLE;
+        if (unitId != -1) {
+            units[unitId-1].status = UnitStatus.IDLE;
+        }
     }
 
     /** 
