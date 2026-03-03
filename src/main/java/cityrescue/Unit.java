@@ -4,6 +4,9 @@ import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
 
+/**
+ * Abstract class for any Unit, contains unit information and the methods related to moving and checking whether they can handle a certain incident.
+ */
 public abstract class Unit {
     int Id;
     int ticksToResolve;
@@ -13,8 +16,6 @@ public abstract class Unit {
     int homeStationId;
     IncidentType[] handleableIncidences;
     int[] loc;
-
-    // implement state (e.g idle)
 
     public Unit(int Id, int stationId, UnitType type) {
         this.Id = Id;
@@ -26,6 +27,7 @@ public abstract class Unit {
     }
 
     /** 
+     * Follows movement rules specified in the task documents, then changes this Unit's location to wherever the algorithm has decided to move. 
      * @param cityMap
      * @param incidents
      */
@@ -69,6 +71,7 @@ public abstract class Unit {
     }
 
     /** 
+     * Returns whether this unit can handle a certain type of incident (e.g Ambulance and Medical).
      * @param incidentType
      * @return boolean
      */
@@ -82,6 +85,9 @@ public abstract class Unit {
     }
 }
 
+/**
+ * Child class for an Ambulance from Unit.
+ */
 class Ambulance extends Unit {
     public Ambulance(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
@@ -90,6 +96,9 @@ class Ambulance extends Unit {
     }
 }
 
+/**
+ * Child class for a Fire Engine from Unit.
+ */
 class FireEngine extends Unit {
     public FireEngine(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);
@@ -98,6 +107,9 @@ class FireEngine extends Unit {
     }
 }
 
+/**
+ * Child class for a Police Car from Unit.
+ */
 class PoliceCar extends Unit {
     public PoliceCar(int Id, int stationId, UnitType type) {
         super(Id, stationId, type);

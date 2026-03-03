@@ -3,6 +3,9 @@ package cityrescue;
 import cityrescue.enums.IncidentStatus;
 import cityrescue.enums.IncidentType;
 
+/**
+ * Stores Incident information. No Methods.
+ */
 public class Incident {
     IncidentType incidentType;
     IncidentStatus incidentStatus;
