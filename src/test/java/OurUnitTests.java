@@ -27,5 +27,8 @@ public class OurUnitTests {
 
         System.out.println(cr.viewUnit(1));
         cr.transferUnit(1,2);
+
+        cr.decommissionUnit(1);
+        cr.transferUnit(1, 2);
     }
 }
