@@ -197,14 +197,14 @@ public class CityRescueImpl implements CityRescue {
         if (!Utils.linearSearch(getUnitIds(), unitId)) { throw new IDNotRecognisedException("Unit does not exist."); }
         if (!Utils.linearSearch(getStationIds(), newStationId)) { throw new IDNotRecognisedException("Station does not exist."); }
         if (stations[newStationId-1].numUnits == stations[newStationId-1].maxUnits) { throw new IllegalStateException("Station is full."); }
-        if (units[unitId-1].status == UnitStatus.IDLE) { throw new IllegalStateException("Unit is not idle."); }
+        if (units[unitId-1].status != UnitStatus.IDLE) { throw new IllegalStateException("Unit is not idle."); }
 
         int stationId = units[unitId-1].homeStationId;
-        stations[stationId].numUnits--;
+        stations[stationId-1].numUnits--;
 
         units[unitId-1].homeStationId = newStationId;
         units[unitId-1].loc = stations[newStationId-1].loc.clone();
-        stations[newStationId].numUnits++;
+        stations[newStationId-1].numUnits++;
     }
 
     @Override
@@ -263,7 +263,7 @@ public class CityRescueImpl implements CityRescue {
         }
         return message;
     }
-
+    
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         if (!cityMap.isInBounds(x, y)){
