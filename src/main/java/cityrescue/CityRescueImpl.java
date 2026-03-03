@@ -187,11 +187,11 @@ public class CityRescueImpl implements CityRescue {
      */
     @Override
     public int[] getStationIds() {
-        int[] stationIds = new int[(stationCounter - stationRemoveCounter)];
+        int[] stationIds = new int[(stationCounter - stationRemoveCounter)]; //how many stations have been added - how many have been removed
         int IdsIndex = 0;
 
         for (int i = 0; i < stationCounter; i++) {
-            if (stations[i] != null) {
+            if (stations[i] != null) { // if station exists then add its Id to the array.
                 stationIds[IdsIndex] = stations[i].Id;
                 IdsIndex++;
             }
@@ -304,7 +304,7 @@ public class CityRescueImpl implements CityRescue {
      */
     @Override
     public int[] getUnitIds() {
-        int[] unitIds = new int[(unitCounter - unitRemoveCounter)];
+        int[] unitIds = new int[(unitCounter - unitRemoveCounter)]; //how many units have been added - how many have been removed
         int IdsIndex = 0;
 
         for (int i = 0; i < unitCounter; i++) {
@@ -333,7 +333,7 @@ public class CityRescueImpl implements CityRescue {
         String incidentStr = Integer.toString(unit.incidentID);
         if (unit.incidentID == -1){
             incidentStr = "-";
-        }
+        }//if unit does not have an assigned incident then displays -.
 
         String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%s",
                                         unitId,
@@ -344,7 +344,7 @@ public class CityRescueImpl implements CityRescue {
                                         unit.status,
                                         incidentStr
                                         );
-        if (unit.status == UnitStatus.AT_SCENE){
+        if (unit.status == UnitStatus.AT_SCENE){//only displays work when unit at scene
             String workMsg = " WORK=" + unit.ticksToResolve;
             message += workMsg;
         }
@@ -396,7 +396,7 @@ public class CityRescueImpl implements CityRescue {
 
         int unitId = -1;
 
-        for (Unit unit : units){
+        for (Unit unit : units){//gets the unit which is assigned to the incident
             if (unit != null) {
                 if (unit.incidentID == incidentId){
                     unitId = unit.Id;
@@ -444,7 +444,7 @@ public class CityRescueImpl implements CityRescue {
      */
     @Override
     public int[] getIncidentIds() {
-        int[] incidentIds = new int[(incidentCounter - incidentRemoveCounter)];
+        int[] incidentIds = new int[(incidentCounter - incidentRemoveCounter)]; //how many incidents have been added - how many have been removed
         int IdsIndex = 0;
 
         for (int i = 0; i < incidentCounter; i++) {
@@ -472,7 +472,7 @@ public class CityRescueImpl implements CityRescue {
 
         int unitId = -1;
 
-        for (Unit unit : units){
+        for (Unit unit : units){//gets the unit which is assigned to the incident
             if (unit != null) {
                 if (unit.incidentID == incidentId){
                     unitId = unit.Id;
@@ -483,7 +483,7 @@ public class CityRescueImpl implements CityRescue {
         String unitIdStr = Integer.toString(unitId);
         if (unitId == -1){
             unitIdStr = "-";
-        }
+        }//If incident is not assigned a unit then displays -
 
         String message = String.format("I#%d TYPE=%s SEV=%d LOC=(%d,%d) STATUS=%s UNIT=%s",
                                         incidentId,
@@ -601,7 +601,7 @@ public class CityRescueImpl implements CityRescue {
         obstacleCounter
         );
 
-        String incidentMsg = "INCIDENTS\n";
+        String incidentMsg = "INCIDENTS\n"; //generates incidents msg in format
         for (int Id=0 ; Id<incidentCounter ; Id++){
             if (incidents[Id] != null){
                 try {
@@ -611,7 +611,7 @@ public class CityRescueImpl implements CityRescue {
             }
         }
 
-        String unitMsg = "UNITS\n";
+        String unitMsg = "UNITS\n"; //generates units msg in format
         for (int Id=0 ; Id<unitCounter ; Id++){
             if (units[Id] != null){
                 try {
