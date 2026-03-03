@@ -15,6 +15,7 @@ public class CityMap {
         this.blocked = new boolean[this.w][this.h];
     }
     /** 
+     * Checks to see if a given coordinate is within the city bounds.
      * @param x
      * @param y
      * @return boolean

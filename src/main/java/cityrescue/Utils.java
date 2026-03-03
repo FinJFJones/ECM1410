@@ -2,6 +2,7 @@ package cityrescue;
 
 public class Utils {
     /** 
+     * Finds an int in a list of ints with a linear search.
      * @param arr
      * @param x
      * @return boolean
@@ -16,6 +17,7 @@ public class Utils {
     }
 
     /** 
+     * Calculates the taxi cab distance (also known as the Manhatten distance) between 2 coordinates.
      * @param coord1
      * @param coord2
      * @return int

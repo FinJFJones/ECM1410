@@ -14,8 +14,6 @@ public abstract class Unit {
     IncidentType[] handleableIncidences;
     int[] loc;
 
-    // implement state (e.g idle)
-
     public Unit(int Id, int stationId, UnitType type) {
         this.Id = Id;
         this.homeStationId = stationId;
@@ -26,6 +24,7 @@ public abstract class Unit {
     }
 
     /** 
+     * Follows movement rules specified in the task documents, then changes this Unit's location to wherever the algorithm has decided to move. 
      * @param cityMap
      * @param incidents
      */
@@ -69,6 +68,7 @@ public abstract class Unit {
     }
 
     /** 
+     * Returns whether this unit can handle a certain type of incident (e.g Ambulance and Medical).
      * @param incidentType
      * @return boolean
      */
