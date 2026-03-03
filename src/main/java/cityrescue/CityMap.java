@@ -14,13 +14,6 @@ public class CityMap {
         this.gridSize = new int[] {this.w,this.h};
         this.blocked = new boolean[this.w][this.h];
     }
-
-    /** 
-     * @return boolean
-     */
-    public boolean isLegalMove() {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
     /** 
      * @param x
      * @param y
