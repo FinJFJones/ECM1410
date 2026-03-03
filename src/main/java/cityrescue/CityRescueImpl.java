@@ -1,4 +1,6 @@
 package cityrescue;
+import java.util.Arrays;
+
 import cityrescue.enums.IncidentStatus;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitStatus;
@@ -189,7 +191,7 @@ public class CityRescueImpl implements CityRescue {
 
         int stationId = units[unitId-1].homeStationId;
         units[unitId-1] = null;
-        stations[stationId-1].numUnits--;
+        stations[stationId].numUnits--;
     }
 
     @Override
@@ -411,7 +413,7 @@ public class CityRescueImpl implements CityRescue {
             if (unit != null) {
                 if (unit.status == UnitStatus.EN_ROUTE) {
                     unit.move(cityMap,incidents);
-                    if (unit.loc == incidents[unit.incidentID-1].loc) {
+                    if (Arrays.equals(unit.loc, incidents[unit.incidentID-1].loc)) {
                         unit.status = UnitStatus.AT_SCENE;
                         incidents[unit.incidentID-1].incidentStatus = IncidentStatus.IN_PROGRESS;
                         incidents[unit.incidentID-1].ticksLeft = unit.ticksToResolve;
