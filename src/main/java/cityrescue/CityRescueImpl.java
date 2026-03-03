@@ -187,7 +187,9 @@ public class CityRescueImpl implements CityRescue {
             throw new IllegalStateException("Unit is either en route or at scene.");
         }
 
-        stations[unitId-1] = null;
+        int stationId = units[unitId-1].homeStationId;
+        units[unitId-1] = null;
+        stations[stationId].numUnits--;
     }
 
     @Override
@@ -197,8 +199,12 @@ public class CityRescueImpl implements CityRescue {
         if (stations[newStationId-1].numUnits == stations[newStationId-1].maxUnits) { throw new IllegalStateException("Station is full."); }
         if (units[unitId-1].status == UnitStatus.IDLE) { throw new IllegalStateException("Unit is not idle."); }
 
+        int stationId = units[unitId-1].homeStationId;
+        stations[stationId].numUnits--;
+
         units[unitId-1].homeStationId = newStationId;
         units[unitId-1].loc = stations[newStationId-1].loc.clone();
+        stations[newStationId].numUnits++;
     }
 
     @Override
