@@ -260,12 +260,12 @@ public class CityRescueImpl implements CityRescue {
                                         incidentStr
                                         );
         if (unit.status == UnitStatus.AT_SCENE){
-            String workMsg = "WORK=" + unit.ticksToResolve;
+            String workMsg = " WORK=" + unit.ticksToResolve;
             message += workMsg;
         }
         return message;
     }
-    
+
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         if (!cityMap.isInBounds(x, y)){
