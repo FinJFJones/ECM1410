@@ -30,6 +30,7 @@ public abstract class Unit {
         int[] incidentLoc = incidents[this.incidentID-1].loc;
         int dist = Utils.taxiCab(incidentLoc, this.loc);
         boolean[] isMoveLegal = new boolean[4];
+        boolean moved = false;
 
         for (int i=0 ; i<4 ; i++){
             int[] move = possible_moves[i];
@@ -41,23 +42,26 @@ public abstract class Unit {
                 if (!cityMap.blocked[newX][newY]){
                     if (Utils.taxiCab(incidentLoc, newLoc) < dist){
                         this.loc = newLoc;
+                        moved = true;
                         break;
                     }
                 isMoveLegal[i] = true;
                 }
             }
         }
-        for (int i=0 ; i<4 ; i++){
-            if (isMoveLegal[i]){
-                int[] move = possible_moves[i];
-                int newX = this.loc[0] + move[0];
-                int newY = this.loc[1] + move[1];
-                int[] newLoc = new int[] {newX,newY};
-                this.loc = newLoc;
-                break;
+
+        if (!moved){
+            for (int i=0 ; i<4 ; i++){
+                if (isMoveLegal[i]){
+                    int[] move = possible_moves[i];
+                    int newX = this.loc[0] + move[0];
+                    int newY = this.loc[1] + move[1];
+                    int[] newLoc = new int[] {newX,newY};
+                    this.loc = newLoc;
+                    break;
+                }
             }
         }
-
     }
 
     public boolean canHandle(IncidentType incidentType) {
