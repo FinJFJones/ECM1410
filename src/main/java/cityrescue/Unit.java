@@ -32,33 +32,33 @@ public abstract class Unit {
      * @param incidents
      */
     public void move(CityMap cityMap,Incident[] incidents) {
-        int[][] possible_moves = {{0,1},{1,0},{0,-1},{-1,0}};
+        int[][] possible_moves = {{0,1},{1,0},{0,-1},{-1,0}}; // possble moves N, E, S, W
         int[] incidentLoc = incidents[this.incidentID-1].loc;
-        int dist = Utils.taxiCab(incidentLoc, this.loc);
+        int dist = Utils.taxiCab(incidentLoc, this.loc); //distance to incident
         boolean[] isMoveLegal = new boolean[4];
         boolean moved = false;
 
         for (int i=0 ; i<4 ; i++){
-            int[] move = possible_moves[i];
+            int[] move = possible_moves[i]; //consider each possible move
             int newX = this.loc[0] + move[0];
             int newY = this.loc[1] + move[1];
             int[] newLoc = new int[] {newX,newY};
 
-            if (cityMap.isInBounds(newX, newY)){
-                if (!cityMap.blocked[newX][newY]){
-                    if (Utils.taxiCab(incidentLoc, newLoc) < dist){
+            if (cityMap.isInBounds(newX, newY)){ //is the move in bounds?
+                if (!cityMap.blocked[newX][newY]){ //is the move blocked?
+                    if (Utils.taxiCab(incidentLoc, newLoc) < dist){ //if it reduces distance then pick it
                         this.loc = newLoc;
                         moved = true;
                         break;
                     }
-                isMoveLegal[i] = true;
+                isMoveLegal[i] = true; //if it doesnt reduce distance then remember it is a legal move.
                 }
             }
         }
 
-        if (!moved){
+        if (!moved){ //if no moves reduced distance
             for (int i=0 ; i<4 ; i++){
-                if (isMoveLegal[i]){
+                if (isMoveLegal[i]){ //take first legal move -> will do no move if no legal moves.
                     int[] move = possible_moves[i];
                     int newX = this.loc[0] + move[0];
                     int newY = this.loc[1] + move[1];
