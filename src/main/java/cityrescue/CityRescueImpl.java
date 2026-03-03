@@ -443,6 +443,7 @@ public class CityRescueImpl implements CityRescue {
                             }
                         }
                         units[unitId-1].status = UnitStatus.IDLE;
+                        units[unitId-1].incidentID = -1;
                     }
                 }
             }
