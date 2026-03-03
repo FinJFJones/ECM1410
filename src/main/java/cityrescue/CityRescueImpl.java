@@ -191,7 +191,7 @@ public class CityRescueImpl implements CityRescue {
 
         int stationId = units[unitId-1].homeStationId;
         units[unitId-1] = null;
-        stations[stationId].numUnits--;
+        stations[stationId-1].numUnits--;
     }
 
     @Override
