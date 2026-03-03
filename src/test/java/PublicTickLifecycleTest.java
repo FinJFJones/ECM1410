@@ -1,9 +1,11 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import cityrescue.*;
-import cityrescue.enums.*;
-import cityrescue.exceptions.*;
+import cityrescue.CityRescue;
+import cityrescue.CityRescueImpl;
+import cityrescue.enums.IncidentType;
+import cityrescue.enums.UnitType;
 
 public class PublicTickLifecycleTest {
     private CityRescue cr;

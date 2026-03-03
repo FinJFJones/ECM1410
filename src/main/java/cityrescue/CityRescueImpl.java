@@ -237,16 +237,19 @@ public class CityRescueImpl implements CityRescue {
         }
         Unit unit = units[unitId-1];
 
-        String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%d WORK=",
+        String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%d",
                                         unitId,
                                         unit.type,
                                         unit.homeStationId,
                                         unit.loc[0],
                                         unit.loc[1],
                                         unit.status,
-                                        unit.incidentID // TODO: add WORK
+                                        unit.incidentID
                                         );
-
+        if (unit.status == UnitStatus.AT_SCENE){
+            String workMsg = "WORK=" + unit.ticksToResolve;
+            message += workMsg;
+        }
         return message;
     }
 
@@ -376,7 +379,7 @@ public class CityRescueImpl implements CityRescue {
                         }
                     }
                     if (unitToDispatch != null) {
-                        unitToDispatch.status = UnitStatus.EN_ROUTE; // TODO: Edit logic here (unitToDispatch may not exist)
+                        unitToDispatch.status = UnitStatus.EN_ROUTE;
                         unitToDispatch.incidentID = incident.Id;
                         incident.incidentStatus = IncidentStatus.DISPATCHED;
                     }
@@ -438,8 +441,8 @@ public class CityRescueImpl implements CityRescue {
         // U#2 TYPE=FIRE_ENGINE HOME=2 LOC=(3,1) STATUS=AT_SCENE INCIDENT=1 WORK=2
         // U#3 TYPE=POLICE_CAR HOME=1 LOC=(1,2) STATUS=EN_ROUTE INCIDENT=2
 
-        String tick_msg = String.format("TICK=%d\n",tick);
-        String count_msg = String.format(
+        String tickMsg = String.format("TICK=%d\n",tick);
+        String countMsg = String.format(
         "STATIONS=%d UNITS=%d INCIDENTS=%d OBSTACLES=%d\n",
         stationCounter,
         unitCounter,
@@ -447,26 +450,26 @@ public class CityRescueImpl implements CityRescue {
         obstacleCounter
         );
 
-        String incident_msg = "INCIDENTS\n";
+        String incidentMsg = "INCIDENTS\n";
         for (int Id=0 ; Id<incidentCounter ; Id++){
             if (incidents[Id] != null){
                 try {
-                    incident_msg = incident_msg + viewIncident(Id) + "\n";
+                    incidentMsg = incidentMsg + viewIncident(Id) + "\n";
                 } catch (IDNotRecognisedException ex) {
                 }
             }
         }
 
-        String unit_msg = "UNITS\n";
+        String unitMsg = "UNITS\n";
         for (int Id=0 ; Id<unitCounter ; Id++){
             if (units[Id] != null){
                 try {
-                    unit_msg = unit_msg + viewUnit(Id) + "\n";
+                    unitMsg = unitMsg + viewUnit(Id) + "\n";
                 } catch (IDNotRecognisedException ex) {
                 }
             }
         }
 
-        return (tick_msg+count_msg+incident_msg+unit_msg);
+        return (tickMsg+countMsg+incidentMsg+unitMsg);
     }
 }
