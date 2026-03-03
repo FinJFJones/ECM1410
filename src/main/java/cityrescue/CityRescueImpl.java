@@ -428,18 +428,20 @@ public class CityRescueImpl implements CityRescue {
         }
         for (Incident incident : incidents) {
             if (incident != null) {
-                if (incident.ticksLeft == 0) {
-                    incident.incidentStatus = IncidentStatus.RESOLVED;
+                if (incident.incidentStatus == IncidentStatus.IN_PROGRESS){
+                    if (incident.ticksLeft == 0) {
+                        incident.incidentStatus = IncidentStatus.RESOLVED;
 
-                    int unitId = -1;
-                    for (Unit unit : units){
-                        if (unit != null) {
-                            if (unit.incidentID == incident.Id){
-                                unitId = unit.Id;
+                        int unitId = -1;
+                        for (Unit unit : units){
+                            if (unit != null) {
+                                if (unit.incidentID == incident.Id){
+                                    unitId = unit.Id;
+                                }
                             }
                         }
+                        units[unitId-1].status = UnitStatus.IDLE;
                     }
-                    units[unitId-1].status = UnitStatus.IDLE;
                 }
             }
         }
