@@ -243,14 +243,19 @@ public class CityRescueImpl implements CityRescue {
         }
         Unit unit = units[unitId-1];
 
-        String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%d",
+        String incidentStr = Integer.toString(unit.incidentID);
+        if (unit.incidentID == -1){
+            incidentStr = "-";
+        }
+
+        String message = String.format("U#%d TYPE=%s HOME=%d LOC=(%d,%d) STATUS=%s INCIDENT=%s",
                                         unitId,
                                         unit.type,
                                         unit.homeStationId,
                                         unit.loc[0],
                                         unit.loc[1],
                                         unit.status,
-                                        unit.incidentID
+                                        incidentStr
                                         );
         if (unit.status == UnitStatus.AT_SCENE){
             String workMsg = "WORK=" + unit.ticksToResolve;
@@ -352,14 +357,19 @@ public class CityRescueImpl implements CityRescue {
             }
         }
 
-        String message = String.format("I#%d TYPE=%s SEV=%d LOC=(%d,%d) STATUS=%s UNIT=%d",
+        String unitIdStr = Integer.toString(unitId);
+        if (unitId == -1){
+            unitIdStr = "-";
+        }
+
+        String message = String.format("I#%d TYPE=%s SEV=%d LOC=(%d,%d) STATUS=%s UNIT=%s",
                                         incidentId,
                                         incident.incidentType,
                                         incident.severity,
                                         incident.loc[0],
                                         incident.loc[1],
                                         incident.incidentStatus,
-                                        unitId
+                                        unitIdStr
                                         );
 
         return message;
