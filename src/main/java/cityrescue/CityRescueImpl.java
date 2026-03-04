@@ -602,22 +602,22 @@ public class CityRescueImpl implements CityRescue {
         );
 
         String incidentMsg = "INCIDENTS\n"; //generates incidents msg in format
-        for (int Id=0 ; Id<incidentCounter ; Id++){
-            if (incidents[Id] != null){
-                try {
-                    incidentMsg = incidentMsg + viewIncident(Id) + "\n";
-                } catch (IDNotRecognisedException ex) {
-                }
+        int[] IncidentIds = getIncidentIds();
+        for (int Id: IncidentIds){
+            try{
+            incidentMsg = incidentMsg + viewIncident(Id) + "\n";
+            } catch(IDNotRecognisedException ex){
+                System.out.println("Incident fails");
             }
         }
 
         String unitMsg = "UNITS\n"; //generates units msg in format
-        for (int Id=0 ; Id<unitCounter ; Id++){
-            if (units[Id] != null){
-                try {
-                    unitMsg = unitMsg + viewUnit(Id) + "\n";
-                } catch (IDNotRecognisedException ex) {
-                }
+        int[] UnitIds = getUnitIds();
+        for (int Id: UnitIds){
+            try{
+            unitMsg = unitMsg + viewUnit(Id) + "\n";
+            } catch(IDNotRecognisedException ex){
+                System.out.println("Incident fails");
             }
         }
 

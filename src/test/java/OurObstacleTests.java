@@ -24,8 +24,8 @@ public class OurObstacleTests {
         cr.reportIncident(IncidentType.MEDICAL, 4, 2, 4);
         cr.dispatch();
 
-        for (int i=0; i<20; i++){
-            //System.out.println(cr.viewUnit(1));
+        for (int i=0; i<10; i++){
+            System.out.println(cr.viewUnit(1));
             cr.tick();
         }
 

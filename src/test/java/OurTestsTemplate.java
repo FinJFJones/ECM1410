@@ -3,7 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import cityrescue.CityRescue;
 import cityrescue.CityRescueImpl;
 
-public class OurTests {
+public class OurTestsTemplate {
     private CityRescue cr;
 
     @BeforeEach
